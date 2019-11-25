@@ -1,0 +1,39 @@
+# Step 1: Test and package
+FROM quay.io/quarkus/centos-quarkus-maven:19.2.1 as build
+USER root
+RUN mkdir /app
+WORKDIR /app
+
+# Copy pom.xml & cache dependencys
+COPY pom.xml /app/pom.xml
+RUN mvn dependency:go-offline
+
+# Copy source & package
+COPY src /app/src
+RUN mvn clean package -Pnative
+
+# Step 2: Build Docker Image
+FROM registry.access.redhat.com/ubi8/ubi-minimal
+
+WORKDIR /work/
+
+# Download watchdog
+RUN echo "Pulling watchdog binary from Github." \
+    && curl -sSLf https://github.com/openfaas-incubator/of-watchdog/releases/download/0.7.2/of-watchdog > /usr/bin/fwatchdog \
+    && chmod +x /usr/bin/fwatchdog
+
+# Copy application
+COPY --from=build /app/target/*-runner /work/application
+RUN chmod 775 /work
+
+# Openfaas configration
+ENV cgi_headers="true"
+ENV fprocess="/work/application"
+ENV mode="http"
+ENV upstream_url="http://127.0.0.1:9000"
+ENV exec_timeout="20s"
+ENV write_timeout="25s"
+ENV read_timeout="25s"
+HEALTHCHECK --interval=1s CMD [ -e /tmp/.lock ] || exit 1
+
+CMD ["fwatchdog"]
