@@ -4,7 +4,7 @@
 
 >  Quarkus Application 可以参考 https://quarkus.io/guides/getting-started
 
-启动应用功能
+启动服务
 
 ```bash
 $ cd function-quarkus-helloworld
@@ -43,7 +43,7 @@ Forking - /work/application []
 2019/11/25 14:22:12 stdout: 2019-11-25 14:22:12,592 INFO  [io.quarkus] (main) Installed features: [cdi, resteasy]
 ```
 
-测试服务
+测试镜像服务
 
 ```bash
 $ curl http://localhost:8080/hello
