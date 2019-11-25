@@ -1,0 +1,9 @@
+provider:
+  name: function-quarkus-helloworld
+  gateway: http://localhost:8080
+
+functions:
+  protectedapi:
+    lang: Dockerfile
+    skip_build: true
+    image: coolbeevip/openfaas-function-quarkus-helloworld:latest

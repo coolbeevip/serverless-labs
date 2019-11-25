@@ -58,7 +58,7 @@ echo -n $PASSWORD | faas-cli login --password-stdin
 http://127.0.0.1:31112
 ```
 
-
+![image-20191125225724884](assets/image-20191125225724884.png)
 
 
 
