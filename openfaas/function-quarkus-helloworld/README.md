@@ -50,7 +50,47 @@ $ curl http://localhost:8080/hello
 Hi,I'm OpenFaaS (0ms)
 ```
 
+## 上传镜像到 DockerHub
+
+在 DockerHub上创建仓库 openfaas-function-quarkus-helloworld
+
+登录 Docker Hub
+
+```bash
+$ docker login
+```
+
+上传镜像
+
+```bash
+$ docker push coolbeevip/openfaas-function-quarkus-helloworld
+```
+
 ## 部署到 OpenFaaS
+
+
+
+登录
+
+```bash
+$ export OPENFAAS_URL=http://127.0.0.1:31112
+$ faas-cli login --password 78b1d4c29831bbd9040d2ffe6da2c9b9c7845bf2
+```
+
+部署
+
+```bash
+$ faas-cli deploy stack.yml 
+Deploying: protectedapi.
+WARNING! Communication is not secure, please consider using HTTPS. Letsencrypt.org offers free SSL/TLS certificates.
+
+Deployed. 202 Accepted.
+URL: http://127.0.0.1:31112/function/quarkus-helloworld
+```
+
+
+
+
 
 
 

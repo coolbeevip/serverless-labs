@@ -1,5 +1,7 @@
 # 在 macOS 上部署 OpenFaaS
 
+> 参考 https://docs.openfaas.com/deployment/kubernetes/
+
 ## 准备
 
 * [Install Docker Desktop on Mac](https://docs.docker.com/docker-for-mac/install/)
@@ -59,6 +61,8 @@ http://127.0.0.1:31112
 ```
 
 ![image-20191125225724884](assets/image-20191125225724884.png)
+
+## 使用 Grafana 监控 OpenFaaS
 
 
 
