@@ -1,5 +1,8 @@
 package org.coolbeevip;
 
+/**
+ * @author zhanglei
+ */
 public class Message {
   private String text;
 

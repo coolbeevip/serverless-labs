@@ -6,6 +6,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+/**
+ * @author zhanglei
+ */
 @Path("/")
 public class GreetingResource {
 
@@ -14,10 +17,10 @@ public class GreetingResource {
   @Consumes(MediaType.APPLICATION_JSON)
   public Message hello(Message msg) {
     Message replyMsg = new Message();
-    if(msg == null){
+    if (msg == null) {
       replyMsg.setText("Hi,I'm OpenFaaS. Nothing to say?");
-    }else{
-      replyMsg.setText("Hi,I'm OpenFaaS. I have received your message '"+msg.getText()+"'");
+    } else {
+      replyMsg.setText("Hi,I'm OpenFaaS. I have received your message '" + msg.getText() + "'");
     }
 
     return replyMsg;
