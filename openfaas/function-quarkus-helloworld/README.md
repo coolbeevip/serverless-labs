@@ -14,8 +14,8 @@ $ cd function-quarkus-helloworld
 测试服务
 
 ```bash
-$ curl http://127.0.0.1:9000
-Hi,I'm OpenFaaS (0ms)
+$ curl -H "Content-Type:application/json" -X POST -d '{"text": "Hello"}' http://127.0.0.1:9000
+{"text":"Hi,I'm OpenFaaS. I have received your message 'Hello'"}
 ```
 
 ## 编译 Native Docker Images
@@ -46,8 +46,8 @@ Forking - /work/application []
 测试镜像服务
 
 ```bash
-$ curl http://localhost:8080
-Hi,I'm OpenFaaS (0ms)
+$ curl -H "Content-Type:application/json" -X POST -d '{"text": "Hello Docker"}' http://127.0.0.1:8080
+{"text":"Hi,I'm OpenFaaS. I have received your message 'Hello Docker'"}
 ```
 
 ## 上传镜像到 DockerHub
@@ -90,8 +90,9 @@ URL: http://127.0.0.1:31112/function/quarkus-helloworld
 
 测试
 
-```
-ab -c 50 -n 5000 http://127.0.0.1:31112/function/quarkus-helloworld
+```bash
+$ curl -H "Content-Type:application/json" -X POST -d '{"text": "Hello Serverless"}' http://127.0.0.1:31112/function/quarkus-helloworld
+{"text":"Hi,I'm OpenFaaS. I have received your message 'Hello Serverless'"}
 ```
 
 
