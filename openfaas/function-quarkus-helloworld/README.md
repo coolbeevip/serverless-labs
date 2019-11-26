@@ -26,7 +26,7 @@ $ curl -H "Content-Type:application/json" -X POST -d '{"text": "Hello"}' http://
 $ docker build -f src/main/docker/Dockerfile.multistage -t coolbeevip/openfaas-function-quarkus-helloworld .
 ```
 
-启动本地镜像
+启动本地镜像（started in 0.008s 毫秒级启动 🏃‍♀️🏃🏃‍♀️🏃🏃‍♀️🏃）
 
 ```bash
 $ docker run -p 8080:8080 coolbeevip/openfaas-function-quarkus-helloworld:latest
