@@ -14,7 +14,7 @@ $ cd function-quarkus-helloworld
 测试服务
 
 ```bash
-$ curl http://127.0.0.1:9000/hello
+$ curl http://127.0.0.1:9000
 Hi,I'm OpenFaaS (0ms)
 ```
 
@@ -46,7 +46,7 @@ Forking - /work/application []
 测试镜像服务
 
 ```bash
-$ curl http://localhost:8080/hello
+$ curl http://localhost:8080
 Hi,I'm OpenFaaS (0ms)
 ```
 
@@ -91,7 +91,7 @@ URL: http://127.0.0.1:31112/function/quarkus-helloworld
 测试
 
 ```
-ab -c 50 -n 5000 http://127.0.0.1:31112/function/quarkus-helloworld/hello
+ab -c 50 -n 5000 http://127.0.0.1:31112/function/quarkus-helloworld
 ```
 
 
