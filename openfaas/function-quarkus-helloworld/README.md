@@ -88,6 +88,12 @@ Deployed. 202 Accepted.
 URL: http://127.0.0.1:31112/function/quarkus-helloworld
 ```
 
+测试
+
+```
+ab -c 100 -n 5000 http://127.0.0.1:31112/function/quarkus-helloworld/hello
+```
+
 
 
 
