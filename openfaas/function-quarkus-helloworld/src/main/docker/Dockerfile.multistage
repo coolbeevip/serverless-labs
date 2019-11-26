@@ -26,14 +26,14 @@ RUN echo "Pulling watchdog binary from Github." \
 COPY --from=build /app/target/*-runner /work/application
 RUN chmod 775 /work
 
-# Openfaas configration
+# Openfaas Gateway Configration
 ENV cgi_headers="true"
 ENV fprocess="/work/application"
 ENV mode="http"
 ENV upstream_url="http://127.0.0.1:9000"
-ENV exec_timeout="20s"
-ENV write_timeout="25s"
-ENV read_timeout="25s"
+ENV exec_timeout="8s"
+ENV write_timeout="8s"
+ENV read_timeout="8s"
 HEALTHCHECK --interval=1s CMD [ -e /tmp/.lock ] || exit 1
 
 CMD ["fwatchdog"]
