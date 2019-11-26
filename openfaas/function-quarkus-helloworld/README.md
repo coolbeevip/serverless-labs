@@ -68,9 +68,7 @@ $ docker push coolbeevip/openfaas-function-quarkus-helloworld
 
 ## 部署到 OpenFaaS
 
-
-
-登录
+登录 OpenFaaS
 
 ```bash
 $ export OPENFAAS_URL=http://127.0.0.1:31112
@@ -88,14 +86,43 @@ Deployed. 202 Accepted.
 URL: http://127.0.0.1:31112/function/quarkus-helloworld
 ```
 
-测试
+查看部署UI
+
+> 在浏览器打开 http://127.0.0.1:31112
+
+可以看到 quarkus-helloworld 已经部署完毕，选择 JSON 后点击 INVOKE 按钮可以测试函数
+
+![image-20191126175756472](assets/image-20191126175756472.png)
+
+打开 K8s 控制台可以看到函数已经部署并拉起
+
+![image-20191126180606517](assets/image-20191126180606517.png)
+
+命令行测试
+
+> 在命令行中输入以下命令进行测试
 
 ```bash
 $ curl -H "Content-Type:application/json" -X POST -d '{"text": "Hello Serverless"}' http://127.0.0.1:31112/function/quarkus-helloworld
 {"text":"Hi,I'm OpenFaaS. I have received your message 'Hello Serverless'"}
 ```
 
+压力测试
 
+> 模拟 50 并发调用 5万次
+
+```bash
+$ echo '{"text": "Hello Serverless"}' > data.json
+$ ab -n 50000  -c 50 -p 'data.json' -T 'application/json' http://127.0.0.1:31112/function/quarkus-helloworld
+```
+
+在K8S控制台可以看到副本自动增加
+
+![image-20191126180934949](assets/image-20191126180934949.png)
+
+观察日志可以看到单个镜像服务启动耗时22毫秒
+
+![image-20191126181124820](assets/image-20191126181124820.png)
 
 
 

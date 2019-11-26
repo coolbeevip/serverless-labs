@@ -4,8 +4,10 @@ USER root
 RUN mkdir /app
 WORKDIR /app
 
-# Copy pom.xml & cache dependencys
+# Copy pom.xml
 COPY pom.xml /app/pom.xml
+
+# Cache dependencies
 RUN mvn dependency:go-offline
 
 # Copy source & package
