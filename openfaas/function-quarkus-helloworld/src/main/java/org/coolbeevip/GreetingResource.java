@@ -14,7 +14,12 @@ public class GreetingResource {
   @Consumes(MediaType.APPLICATION_JSON)
   public Message hello(Message msg) {
     Message replyMsg = new Message();
-    replyMsg.setText("Hi,I'm OpenFaaS. I have received your message '"+msg.getText()+"'");
+    if(msg == null){
+      replyMsg.setText("Hi,I'm OpenFaaS. Nothing to say?");
+    }else{
+      replyMsg.setText("Hi,I'm OpenFaaS. I have received your message '"+msg.getText()+"'");
+    }
+
     return replyMsg;
   }
 }
