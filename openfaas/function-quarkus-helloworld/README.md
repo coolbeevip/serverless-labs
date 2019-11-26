@@ -81,7 +81,7 @@ $ faas-cli login --password 78b1d4c29831bbd9040d2ffe6da2c9b9c7845bf2
 
 ```bash
 $ faas-cli deploy stack.yml 
-Deploying: protectedapi.
+Deploying: quarkus-helloworld.
 WARNING! Communication is not secure, please consider using HTTPS. Letsencrypt.org offers free SSL/TLS certificates.
 
 Deployed. 202 Accepted.
