@@ -109,11 +109,68 @@ $ curl -H "Content-Type:application/json" -X POST -d '{"text": "Hello Serverless
 
 压力测试
 
-> 模拟 50 并发调用 5万次
+> 部署三节点K8S集群，模拟 100 并发调用 50万次
 
 ```bash
 $ echo '{"text": "Hello Serverless"}' > data.json
-$ ab -n 50000  -c 50 -p 'data.json' -T 'application/json' http://127.0.0.1:31112/function/quarkus-helloworld
+$ ab -n 50000  -c 50 -p 'data.json' -T 'application/json' http://10.22.1.191:31112/function/quarkus-helloworld
+This is ApacheBench, Version 2.3 <$Revision: 1430300 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 10.22.1.191 (be patient)
+Completed 50000 requests
+Completed 100000 requests
+Completed 150000 requests
+Completed 200000 requests
+Completed 250000 requests
+Completed 300000 requests
+Completed 350000 requests
+Completed 400000 requests
+Completed 450000 requests
+Completed 500000 requests
+Finished 500000 requests
+
+
+Server Software:
+Server Hostname:        10.22.1.191
+Server Port:            31112
+
+Document Path:          /function/quarkus-helloworld
+Document Length:        75 bytes
+
+Concurrency Level:      100
+Time taken for tests:   131.603 seconds
+Complete requests:      500000
+Failed requests:        0
+Write errors:           0
+Total transferred:      148500000 bytes
+Total body sent:        97000000
+HTML transferred:       37500000 bytes
+Requests per second:    3799.31 [#/sec] (mean)
+Time per request:       26.321 [ms] (mean)
+Time per request:       0.263 [ms] (mean, across all concurrent requests)
+Transfer rate:          1101.95 [Kbytes/sec] received
+                        719.79 kb/s sent
+                        1821.74 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    1  10.0      1    1005
+Processing:     1   24 156.0     20   16208
+Waiting:        1   24 156.0     19   16208
+Total:          2   26 156.3     21   16211
+
+Percentage of the requests served within a certain time (ms)
+  50%     21
+  66%     24
+  75%     27
+  80%     29
+  90%     34
+  95%     39
+  98%     47
+  99%     55
+ 100%  16211 (longest request)
 ```
 
 在K8S控制台可以看到副本自动增加
