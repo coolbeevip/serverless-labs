@@ -21,18 +21,21 @@ Hi,I'm OpenFaaS. I have received your message 'hello'
 多阶段编译本地应用镜像
 
 ```bash
-$ docker build -t coolbeevip/openfaas-function-golang-helloworld .
+$ docker build -t coolbeevip/openfaas-function-golang-http-helloworld .
 ```
 
 启动本地镜像
 
 ```bash
-$ docker run -p 8080:8080 coolbeevip/openfaas-function-golang-helloworld:latest
-2019/11/29 03:26:37 OperationalMode: streaming
-2019/11/29 03:26:37 Timeouts: read: 10s, write: 10s hard: 10s.
-2019/11/29 03:26:37 Listening on port: 8080
-2019/11/29 03:26:37 Writing lock-file to: /tmp/.lock
-2019/11/29 03:26:37 Metrics listening on port: 8081
+$ docker run -p 8080:8080 coolbeevip/openfaas-function-golang-http-helloworld:latest
+2019/11/29 10:29:27 Started logging stderr from function.
+2019/11/29 10:29:27 Started logging stdout from function.
+Forking - ./handler []
+2019/11/29 10:29:27 OperationalMode: http
+2019/11/29 10:29:27 Timeouts: read: 10s, write: 10s hard: 10s.
+2019/11/29 10:29:27 Listening on port: 8080
+2019/11/29 10:29:27 Writing lock-file to: /tmp/.lock
+2019/11/29 10:29:27 Metrics listening on port: 8081
 ```
 
 测试镜像服务
@@ -55,7 +58,7 @@ $ docker login
 上传镜像
 
 ```bash
-$ docker push coolbeevip/openfaas-function-golang-helloworld
+$ docker push coolbeevip/openfaas-function-golang-http-helloworld
 ```
 
 ## 部署到 OpenFaaS
@@ -71,11 +74,11 @@ $ faas-cli login --password 78b1d4c29831bbd9040d2ffe6da2c9b9c7845bf2
 
 ```bash
 $ faas-cli deploy stack.yml 
-Deploying: golang-helloworld.
+Deploying: golang-http-helloworld.
 WARNING! Communication is not secure, please consider using HTTPS. Letsencrypt.org offers free SSL/TLS certificates.
 
 Deployed. 202 Accepted.
-URL: http://127.0.0.1:31112/function/golang-helloworld
+URL: http://127.0.0.1:31112/function/golang-http-helloworld
 ```
 
 测试
@@ -83,7 +86,7 @@ URL: http://127.0.0.1:31112/function/golang-helloworld
 > 在命令行中输入以下命令进行测试
 
 ```bash
-$ curl -H "Content-Type:application/json" -X POST -d '{"text": "Hello Serverless"}' http://127.0.0.1:31112/function/golang-helloworld
+$ curl -H "Content-Type:application/json" -X POST -d '{"text": "Hello Serverless"}' http://127.0.0.1:31112/function/golang-http-helloworld
 {"text":"Hi,I'm OpenFaaS. I have received your message 'Hello Serverless'"}
 ```
 
@@ -93,7 +96,7 @@ $ curl -H "Content-Type:application/json" -X POST -d '{"text": "Hello Serverless
 
 ```bash
 $ echo '{"text": "Hello Serverless"}' > data.json
-$ ab -n 500000  -c 100 -p 'data.json' -T 'application/json' http://10.22.1.191:31112/function/golang-helloworld
+$ ab -n 500000  -c 100 -p 'data.json' -T 'application/json' http://10.22.1.191:31112/function/golang-http-helloworld
 This is ApacheBench, Version 2.3 <$Revision: 1430300 $>
 Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
 Licensed to The Apache Software Foundation, http://www.apache.org/
@@ -116,39 +119,39 @@ Server Software:
 Server Hostname:        10.22.1.191
 Server Port:            31112
 
-Document Path:          /function/golang-helloworld
-Document Length:        78 bytes
+Document Path:          /function/golang-http-helloworld
+Document Length:        64 bytes
 
 Concurrency Level:      100
-Time taken for tests:   536.831 seconds
+Time taken for tests:   161.093 seconds
 Complete requests:      500000
 Failed requests:        0
 Write errors:           0
-Total transferred:      139000000 bytes
-Total body sent:        96500000
-HTML transferred:       39000000 bytes
-Requests per second:    931.39 [#/sec] (mean)
-Time per request:       107.366 [ms] (mean)
-Time per request:       1.074 [ms] (mean, across all concurrent requests)
-Transfer rate:          252.86 [Kbytes/sec] received
-                        175.55 kb/s sent
-                        428.40 kb/s total
+Total transferred:      147500000 bytes
+Total body sent:        99000000
+HTML transferred:       32000000 bytes
+Requests per second:    3103.79 [#/sec] (mean)
+Time per request:       32.219 [ms] (mean)
+Time per request:       0.322 [ms] (mean, across all concurrent requests)
+Transfer rate:          894.16 [Kbytes/sec] received
+                        600.15 kb/s sent
+                        1494.30 kb/s total
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
-Connect:        0    1  10.9      0    1004
-Processing:     2  106  41.6    100    2087
-Waiting:        2  106  41.6    100    2087
-Total:          3  107  43.1    100    2111
+Connect:        0    1  15.7      1    1011
+Processing:     1   29 449.7     13   22017
+Waiting:        1   28 449.7     12   22017
+Total:          1   30 450.4     14   22489
 
 Percentage of the requests served within a certain time (ms)
-  50%    100
-  66%    103
-  75%    104
-  80%    106
-  90%    112
-  95%    120
-  98%    184
-  99%    403
- 100%   2111 (longest request)
+  50%     14
+  66%     19
+  75%     22
+  80%     24
+  90%     29
+  95%     35
+  98%     43
+  99%     52
+ 100%  22489 (longest request)
 ```

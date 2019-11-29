@@ -113,7 +113,7 @@ $ curl -H "Content-Type:application/json" -X POST -d '{"text": "Hello Serverless
 
 ```bash
 $ echo '{"text": "Hello Serverless"}' > data.json
-$ ab -n 50000  -c 50 -p 'data.json' -T 'application/json' http://10.22.1.191:31112/function/quarkus-helloworld
+$ ab -n 500000  -c 100 -p 'data.json' -T 'application/json' http://10.22.1.191:31112/function/quarkus-helloworld
 This is ApacheBench, Version 2.3 <$Revision: 1430300 $>
 Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
 Licensed to The Apache Software Foundation, http://www.apache.org/
