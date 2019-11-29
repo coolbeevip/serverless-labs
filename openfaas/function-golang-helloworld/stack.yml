@@ -1,0 +1,9 @@
+version: 1.0
+provider:
+  name: faas
+  gateway: http://10.22.1.191:31112
+functions:
+  golang-helloworld:
+    lang: Dockerfile
+    skip_build: true
+    image: coolbeevip/openfaas-function-golang-helloworld:latest
