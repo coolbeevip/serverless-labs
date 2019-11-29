@@ -24,7 +24,7 @@ Hi,I'm OpenFaaS. I have received your message 'hello'
 $ docker build -t coolbeevip/openfaas-function-golang-helloworld .
 ```
 
-启动本地镜像（started in 0.008s 毫秒级启动 🏃‍♀️🏃🏃‍♀️🏃🏃‍♀️🏃）
+启动本地镜像
 
 ```bash
 $ docker run -p 8080:8080 coolbeevip/openfaas-function-golang-helloworld:latest
