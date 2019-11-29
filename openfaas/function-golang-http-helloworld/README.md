@@ -1,20 +1,4 @@
-# OpenFaaS : Golang Function
-
-## 创建一个 Golang 应用
-
-编译
-
-```bash
-$ cd function-golang-helloworld
-$ go build cmd/dockerd/main.go 
-```
-
-测试
-
-```bash
-$ echo 'hello' | ./main
-Hi,I'm OpenFaaS. I have received your message 'hello'
-```
+# OpenFaaS : Golang Http Function
 
 ## 编译 Docker Images
 
