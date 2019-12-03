@@ -1,0 +1,11 @@
+version: 1.0
+provider:
+  name: faas
+  gateway: http://127.0.0.1:31112
+functions:
+  golang-http-helloworld:
+    lang: Dockerfile
+    skip_build: true
+    image: coolbeevip/openfaas-function-golang-http-helloworld:latest
+    annotations:
+      topic: faas-request    
